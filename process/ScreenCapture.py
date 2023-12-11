@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import time
+
 import win32gui, win32con
 from PIL import ImageGrab
+from PIL import ImageChops
 
 class ScreenCapture:
     def __init__(self):
@@ -31,16 +34,37 @@ class ScreenCapture:
     
     def run(self):
         img = self._getCapture()
+        # img.show("test")
         return self._splitCapture(img)
-        
 
 
-        
+def isSame(imgA, imgB):
+    if imgA is None or imgB is None:
+        return False
+    diff = ImageChops.difference(imgA, imgB)
+    if diff.getbbox():
+        return False
+    return True
 
-        
-        
 
-        
-
-
-
+if __name__ == "__main__":
+    print("hello")
+    sc = ScreenCapture()
+    rate = 1356 / 1085
+    sc.bound = [num * rate for num in sc.bound]
+    print(sc.bound)
+    tmpImg = None
+    for i in range(0,200):
+        img = sc._getCapture()
+        if not isSame(tmpImg, img):
+            img_name = f'../weread_pic/{i}.jpg'
+            img.save(img_name)
+            tmpImg = img
+            print(img_name)
+        time.sleep(1)
+    # img.show()
+    # quesImg = img.crop((0, 460, 517, 660))
+    # quesImg.show()
+    # print(sc.bound, rate)
+    # qry, anw = sc.run()
+    # qry.show()
