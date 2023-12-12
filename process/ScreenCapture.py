@@ -50,7 +50,7 @@ def isSame(imgA, imgB):
 if __name__ == "__main__":
     print("hello")
     sc = ScreenCapture()
-    rate = 1356 / 1085
+    rate = 1.25
     sc.bound = [num * rate for num in sc.bound]
     print(sc.bound)
     tmpImg = None

@@ -62,4 +62,3 @@ class Query:
             freq, rightAnswer, hint = [], None, None
         return freq, rightAnswer, hint
 
-        
